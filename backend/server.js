@@ -12,6 +12,16 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-server.listen(PORT, () => {
-  console.log(`Server is listening on ${PORT}`);
-});
+// connecting to mongoDB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    // listening on server
+    server.listen(PORT, () => {
+      console.log(`Server is listening on ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Database connection failed. Server not started");
+    console.log(`This is the ERROR: ${err}`);
+  });
