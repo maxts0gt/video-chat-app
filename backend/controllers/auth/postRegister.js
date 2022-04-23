@@ -23,7 +23,7 @@ const postRegister = async (req, res) => {
     });
 
     // create token
-    const token = "JWT TOKEN";
+    const token = "JWT_TOKEN";
 
     // send the response
     res.status(201).json({
