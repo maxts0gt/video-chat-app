@@ -1,12 +1,13 @@
 const User = require("../../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const postRegister = async (req, res) => {
   try {
     const { username, mail, password } = req.body;
 
     // check if user exists
-    const userExists = await User.exists({ mail: mail.toLowercase() });
+    const userExists = await User.exists({ mail: mail.toLowerCase() });
 
     if (userExists) {
       return res.status(409).send("E-mail is already in use!");
@@ -18,12 +19,21 @@ const postRegister = async (req, res) => {
     // create user doc and save in mongodb
     const user = await User.create({
       username,
-      mail: mail.toLowercase(),
+      mail: mail.toLowerCase(),
       password: encryptedPassword,
     });
 
     // create token
-    const token = "JWT_TOKEN";
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        mail,
+      },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: "24h",
+      }
+    );
 
     // send the response
     res.status(201).json({
