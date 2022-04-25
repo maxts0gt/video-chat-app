@@ -4,30 +4,32 @@ import RegisterPageHeader from './RegisterPageHeader';
 import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageInputs from './RegisterPageInputs';
 import { validateRegisterForm } from '../../shared/utils/validators';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getActions } from '../../store/actions/authActions';
 
-function RegisterPage() {
+function RegisterPage({ register }) {
+	const navigate = useNavigate();
 	const [mail, setMail] = useState('');
-	const [name, setName] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [isFormValid, setIsFormValid] = useState(false);
 
 	useEffect(() => {
-		setIsFormValid(validateRegisterForm({ name, mail, password }));
-	}, [mail, password, name, setIsFormValid]);
+		setIsFormValid(validateRegisterForm({ username, mail, password }));
+	}, [mail, password, username, setIsFormValid]);
 
 	const handleRegister = () => {
-		console.log(mail);
-		console.log(password);
-		console.log(name);
-		console.log('Register');
+		const userDetails = { username, mail, password };
+		register(userDetails, navigate);
 	};
 
 	return (
 		<AuthBox>
 			<RegisterPageHeader />
 			<RegisterPageInputs
-				name={name}
-				setName={setName}
+				username={username}
+				setUsername={setUsername}
 				mail={mail}
 				setMail={setMail}
 				password={password}
@@ -41,4 +43,10 @@ function RegisterPage() {
 	);
 }
 
-export default RegisterPage;
+const mapActionsToProps = (dispatch) => {
+	return {
+		...getActions(dispatch),
+	};
+};
+
+export default connect(null, mapActionsToProps)(RegisterPage);

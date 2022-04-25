@@ -2,8 +2,8 @@ import React from 'react';
 import InputWithLabel from '../../shared/components/InputWithLabel';
 
 const RegisterPageInputs = ({
-	name,
-	setName,
+	username,
+	setUsername,
 	mail,
 	setMail,
 	password,
@@ -12,8 +12,8 @@ const RegisterPageInputs = ({
 	return (
 		<>
 			<InputWithLabel
-				value={name}
-				setValue={setName}
+				value={username}
+				setValue={setUsername}
 				label='Username'
 				type='text'
 				placeholder='Enter username'

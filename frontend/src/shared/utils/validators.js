@@ -5,10 +5,10 @@ export const validateLoginForm = ({ mail, password }) => {
 	return isMailValid && isPasswordValid;
 };
 
-export const validateRegisterForm = ({ name, mail, password }) => {
+export const validateRegisterForm = ({ username, mail, password }) => {
 	const isMailValid = validateMail(mail);
 	const isPasswordValid = validatePassword(password);
-	const isNameValid = validateName(name);
+	const isNameValid = validateName(username);
 
 	return isNameValid && isMailValid && isPasswordValid;
 };
@@ -17,8 +17,8 @@ const validatePassword = (password) => {
 	return password.length > 5 && password.length < 13;
 };
 
-const validateName = (name) => {
-	return name.length > 3 && name.length < 13;
+const validateName = (username) => {
+	return username.length > 3 && username.length < 13;
 };
 
 const validateMail = (mail) => {

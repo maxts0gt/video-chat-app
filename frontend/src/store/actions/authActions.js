@@ -6,9 +6,10 @@ export const authActions = {
 
 export const getActions = (dispatch) => {
 	return {
-		login: (userDetails, history) => dispatch(login(userDetails, history)),
-		register: (userDetails, history) =>
-			dispatch(register(userDetails, history)),
+		login: (userDetails, navigate) =>
+			dispatch(login(userDetails, navigate)),
+		register: (userDetails, navigate) =>
+			dispatch(register(userDetails, navigate)),
 	};
 };
 
@@ -19,7 +20,7 @@ const setUserDetails = (userDetails) => {
 	};
 };
 
-const login = (userDetails, history) => {
+const login = (userDetails, navigate) => {
 	return async (dispatch) => {
 		const response = await api.login(userDetails);
 
@@ -30,22 +31,23 @@ const login = (userDetails, history) => {
 			localStorage.setItem('user', JSON.stringify(userDetails));
 
 			dispatch(setUserDetails(userDetails));
-			history.push('/dashboard');
+			navigate('/dashboard');
 		}
 	};
 };
-const register = (userDetails, history) => {
+const register = (userDetails, navigate) => {
 	return async (dispatch) => {
 		const response = await api.register(userDetails);
+		console.log(response);
 
 		if (response.error) {
-			console.log(response.error);
+			console.log('error at actions', response.error);
 		} else {
-			const { userDetails } = response.data;
+			const { userDetails } = response?.data;
 			localStorage.setItem('user', JSON.stringify(userDetails));
 
 			dispatch(setUserDetails(userDetails));
-			history.push('/dashboard');
+			navigate('/dashboard');
 		}
 	};
 };
