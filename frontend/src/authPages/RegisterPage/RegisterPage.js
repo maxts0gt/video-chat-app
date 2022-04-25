@@ -3,6 +3,7 @@ import AuthBox from '../../shared/components/AuthBox';
 import RegisterPageHeader from './RegisterPageHeader';
 import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageInputs from './RegisterPageInputs';
+import { validateRegisterForm } from '../../shared/utils/validators';
 
 function RegisterPage() {
 	const [mail, setMail] = useState('');
@@ -10,8 +11,19 @@ function RegisterPage() {
 	const [password, setPassword] = useState('');
 	const [isFormValid, setIsFormValid] = useState(false);
 
+	useEffect(() => {
+		setIsFormValid(validateRegisterForm({ name, mail, password }));
+	}, [mail, password, name, setIsFormValid]);
+
+	const handleRegister = () => {
+		console.log(mail);
+		console.log(password);
+		console.log(name);
+		console.log('Register');
+	};
+
 	return (
-		<AuthBox boxSize={900}>
+		<AuthBox>
 			<RegisterPageHeader />
 			<RegisterPageInputs
 				name={name}
@@ -21,7 +33,10 @@ function RegisterPage() {
 				password={password}
 				setPassword={setPassword}
 			/>
-			<RegisterPageFooter />
+			<RegisterPageFooter
+				handleRegister={handleRegister}
+				isFormValid={isFormValid}
+			/>
 		</AuthBox>
 	);
 }

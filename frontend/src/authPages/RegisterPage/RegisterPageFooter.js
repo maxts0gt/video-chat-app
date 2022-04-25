@@ -14,7 +14,7 @@ const getFormValidMessage = () => {
 	return 'Press to register!';
 };
 
-const RegiterPageFooter = ({ handleLogin, isFormValid }) => {
+const RegiterPageFooter = ({ handleRegister, isFormValid }) => {
 	const navigate = useNavigate();
 
 	const handlePushToLoginPage = () => {
@@ -38,7 +38,7 @@ const RegiterPageFooter = ({ handleLogin, isFormValid }) => {
 							cursor: 'pointer',
 						}}
 						disabled={!isFormValid}
-						onClick={handleLogin}
+						onClick={handleRegister}
 					/>
 				</div>
 			</Tooltip>
