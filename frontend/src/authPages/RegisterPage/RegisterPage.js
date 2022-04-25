@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AuthBox from '../../shared/components/AuthBox';
+import RegisterPageHeader from './RegisterPageHeader';
+import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageInputs from './RegisterPageInputs';
 
 function RegisterPage() {
@@ -9,7 +11,8 @@ function RegisterPage() {
 	const [isFormValid, setIsFormValid] = useState(false);
 
 	return (
-		<AuthBox>
+		<AuthBox boxSize={900}>
+			<RegisterPageHeader />
 			<RegisterPageInputs
 				name={name}
 				setName={setName}
@@ -18,6 +21,7 @@ function RegisterPage() {
 				password={password}
 				setPassword={setPassword}
 			/>
+			<RegisterPageFooter />
 		</AuthBox>
 	);
 }
