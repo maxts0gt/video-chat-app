@@ -2,7 +2,7 @@ import React from 'react';
 import CustomFriendButton from '../../shared/components/CustomPrimaryButton';
 
 const additionalStyles = {
-	marginTop: '10xp;',
+	marginTop: '10px',
 	marginLeft: '5px',
 	width: '80%',
 	height: '30px',
