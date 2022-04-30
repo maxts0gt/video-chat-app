@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { validateMail } from '../../shared/utils/validators';
 import InputWithLabel from '../../shared/components/InputWithLabel';
+import CustomPrimaryButton from '../../shared/components/CustomPrimaryButton';
 
 const AddFriendDialog = ({
 	isDialogOpen,
@@ -24,7 +25,7 @@ const AddFriendDialog = ({
 	};
 
 	useEffect(() => {
-		handleSendInvitation(validateMail(mail));
+		setIsFormValid(validateMail(mail));
 	}, [mail, setIsFormValid]);
 
 	return (
@@ -48,6 +49,18 @@ const AddFriendDialog = ({
 						placeholder='Enter mail address'
 					></InputWithLabel>
 				</DialogContent>
+				<DialogActions>
+					<CustomPrimaryButton
+						onClick={handleSendInvitation}
+						disabled={!isFormValid}
+						label='Send'
+						additionalStyles={{
+							marginLeft: '15px',
+							marginRight: '15px',
+							marginBottom: '10px',
+						}}
+					/>
+				</DialogActions>
 			</Dialog>
 		</div>
 	);
