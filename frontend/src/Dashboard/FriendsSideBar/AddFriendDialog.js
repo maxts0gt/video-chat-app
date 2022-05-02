@@ -57,7 +57,7 @@ const AddFriendDialog = ({
 						additionalStyles={{
 							marginLeft: '15px',
 							marginRight: '15px',
-							marginBottom: '10px',
+							marginBottom: '15px',
 						}}
 					/>
 				</DialogActions>
