@@ -7,6 +7,7 @@ import FriendsSideBar from './FriendsSideBar/FriendsSideBar';
 import { logout } from '../shared/utils/auth';
 import { connect } from 'react-redux';
 import { getActions } from '../store/actions/authActions';
+import { connectWithSocketServer } from '../realTimeCommunication/socketCommunication';
 
 const BoxWrapper = styled('div')({
 	backgroundColor: 'teal',
@@ -25,6 +26,7 @@ function Dashboard({ setUserDetails }) {
 			logout();
 		} else {
 			setUserDetails(JSON.parse(userDetails));
+			connectWithSocketServer(JSON.parse(userDetails));
 		}
 	});
 
